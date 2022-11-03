@@ -4,15 +4,17 @@ import { useState } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
 
+import PropTypes from 'prop-types'
+
 const Product = props => {
 
   const [currentColor , setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
 
-  function getPrice () {
-    console.log('getPrice' + props.basePrice + props.sizes[0].additionalPrice)
+  const getPrice = (basePrice, additionalPrice) => {
+    console.log('getPrice' , basePrice + additionalPrice)
 
-    return props.basePrice + props.sizes[0].additionalPrice
+    return basePrice + additionalPrice
   }
 
   const addToCard = (e) => {
@@ -34,7 +36,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {getPrice()}$</span>
+          <span className={styles.price}>Price: {getPrice(props.basePrice, props.sizes.find((item) => item.name === currentSize).additionalPrice)}$</span>
         </header>
         <ProductForm
         colors={props.colors}
@@ -51,5 +53,14 @@ const Product = props => {
     </article>
   )
 };
+
+Product.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  basePrice: PropTypes.number.isRequired,
+  colors: PropTypes.array.isRequired,
+  sizes: PropTypes.array.isRequired,
+}
 
 export default Product;

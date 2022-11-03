@@ -23,11 +23,16 @@ const ProductForm = (props) => {
         </Button>
       </form>
     );
-}
+};
 
 ProductForm.propTypes = {
   sizes: PropTypes.array.isRequired,
+  currentSize: PropTypes.string.isRequired,
+  setCurrentSize: PropTypes.func.isRequired,
+
   colors: PropTypes.array.isRequired,
-}
+  currentColor: PropTypes.string.isRequired,
+  setCurrentColor: PropTypes.func.isRequired,
+};
 
 export default ProductForm;
