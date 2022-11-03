@@ -1,5 +1,5 @@
 import styles from './Product.module.scss';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
@@ -16,6 +16,10 @@ const Product = props => {
 
     return basePrice + additionalPrice
   }
+
+  const fullPrice = useMemo (() => getPrice(props.basePrice, props.sizes.find((item) => item.name === currentSize).additionalPrice),
+  [props.basePrice, currentSize, props.sizes]
+  );
 
   const addToCard = (e) => {
     e.preventDefault();
@@ -36,7 +40,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {getPrice(props.basePrice, props.sizes.find((item) => item.name === currentSize).additionalPrice)}$</span>
+          <span className={styles.price}>Price: {fullPrice}$</span>
         </header>
         <ProductForm
         colors={props.colors}
