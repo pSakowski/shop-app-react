@@ -8,20 +8,21 @@ const Product = props => {
 
   const [currentColor , setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
-  const [currentPrice, setPrice] = useState(props.sizes[0].additionalPrice);
 
-  const getPrice = () => {
-    return props.basePrice + currentPrice;
+  function getPrice () {
+    console.log('getPrice' + props.basePrice + props.sizes[0].additionalPrice)
+
+    return props.basePrice + props.sizes[0].additionalPrice
   }
 
-  const addToCart = (e) => {
+  const addToCard = (e) => {
     e.preventDefault();
     console.log
     (`
     Summary
     =======
     Name: ${props.title} 
-    Price: ${getPrice()}
+    Price: ${getPrice()}$
     Size: ${currentSize}
     Color: ${currentColor}
     `);
@@ -35,13 +36,16 @@ const Product = props => {
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <ProductForm 
-        setCurrentColor={setCurrentColor}
-        setCurrentSize={setCurrentSize}
-        setPrice={setPrice}
-        addToCart={addToCart}
+        <ProductForm
         colors={props.colors}
+        currentColor={currentColor}
+        setCurrentColor={setCurrentColor}
+
         sizes={props.sizes}
+        currentSize={currentSize}
+        setCurrentSize={setCurrentSize}
+        
+        addToCard={addToCard}
         />
       </div>
     </article>

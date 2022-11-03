@@ -9,8 +9,8 @@ const ProductForm = (props) => {
     return (
       <form onSubmit={props.addToCard}>
         <OptionSize
-          currentSize={props.currentSize}
           sizes={props.sizes}
+          currentSize={props.currentSize}
           setCurrentSize={props.setCurrentSize}
         />
         <OptionColor 
